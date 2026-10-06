@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>BrainBlitz — Make learning a game</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<meta name="description" content="BrainBlitz: host live quiz games. Students join on any device and race for the podium.">
+<meta name="theme-color" content="#7C3AED">
+<meta property="og:title" content="BrainBlitz: make learning a game">
+<meta property="og:description" content="Host a live quiz in seconds. Students join on any device.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='24' fill='%237C3AED'/%3E%3Ctext x='50' y='70' font-size='62' text-anchor='middle'%3E%E2%9A%A1%3C/text%3E%3C/svg%3E">
+<script src="assets/js/theme-init.js"></script>
+<link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body data-state="home">
+<div data-screen="home">
+
+<header>
+  <nav class="nav" aria-label="Main">
+    <a href="#" class="logo"><i>⚡</i>BrainBlitz</a>
+    <div class="links" id="navLinks">
+      <a href="#" id="createNav">Create quiz</a>
+      <a href="#discover">Discover</a>
+      <a href="#modes">Game Modes</a>
+      <a href="#teachers">For Teachers</a>
+    </div>
+    <a href="#" class="btn lime" id="hostNav">Host a game</a>
+    <button class="menu-btn" id="navBtn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks">☰</button>
+  </nav>
+</header>
+
+<main>
+<section class="hero">
+  <div class="blob b1"></div><div class="blob b2"></div><div class="grain"></div>
+  <div class="wrap">
+    <div>
+      <span class="pill"><b></b>Live in 12,000+ classrooms</span>
+      <h1>Make learning <em>a game.</em></h1>
+      <p class="lede">Host a live quiz in seconds. Students join on any device and race for the podium.</p>
+      <div class="cta">
+        <a href="#" class="btn lime lg" id="hostHero">Host a game</a>
+        <a href="#" class="btn ghost lg" id="createHero">Create a quiz</a>
+        <a href="#discover" class="btn ghost lg">Browse quizzes</a>
+      </div>
+    </div>
+
+    <div class="card join">
+      <div class="vp" id="vp"><div class="track" id="track">
+
+        <div class="stp">
+          <h2>Join a game</h2>
+          <p>Enter the PIN on your teacher's screen.</p>
+          <label for="p0">Game PIN</label>
+          <div class="pins" id="pins" role="group" aria-label="6-digit game PIN">
+            <input class="pinbox" id="p0" data-f inputmode="numeric" maxlength="1" autocomplete="off" aria-label="Digit 1">
+            <input class="pinbox" inputmode="numeric" maxlength="1" autocomplete="off" aria-label="Digit 2">
+            <input class="pinbox" inputmode="numeric" maxlength="1" autocomplete="off" aria-label="Digit 3">
+            <input class="pinbox" inputmode="numeric" maxlength="1" autocomplete="off" aria-label="Digit 4">
+            <input class="pinbox" inputmode="numeric" maxlength="1" autocomplete="off" aria-label="Digit 5">
+            <input class="pinbox" inputmode="numeric" maxlength="1" autocomplete="off" aria-label="Digit 6">
+          </div>
+          <div class="msg" id="msg" role="status"></div>
+          <button class="btn lg" id="enter" type="button" style="margin-top:6px">Enter</button>
+          <div class="hint">Want to host instead? <a href="#teachers">Sign up free</a></div>
+        </div>
+
+        <div class="stp">
+          <button class="back" type="button" data-back="0">← Back</button>
+          <h2>Pick a nickname</h2>
+          <p>This is what everyone sees on the big screen.</p>
+          <label for="nick">Nickname</label>
+          <input class="nick" id="nick" data-f maxlength="14" placeholder="Your nickname" autocomplete="off">
+          <div class="msg" id="nmsg" role="status"></div>
+          <button class="btn lg" id="nickGo" type="button" style="margin-top:6px">Next</button>
+        </div>
+
+        <div class="stp">
+          <button class="back" type="button" data-back="1">← Back</button>
+          <h2>Choose your Blitzer</h2>
+          <p style="margin-bottom:0">Your character for this game.</p>
+          <div class="grid12" id="grid" role="radiogroup" aria-label="Blitzers"></div>
+          <div class="chosen" id="chosen"></div>
+          <button class="btn lg" id="joinGo" type="button" disabled>Join game</button>
+        </div>
+
+        <div class="stp wait">
+          <div class="wav" id="wAv"></div>
+          <h2>You're in! 🎉</h2>
+          <p style="margin:6px 0 4px">See your name on the screen?</p>
+          <div class="chip" id="wName"></div>
+          <div class="wtxt">Waiting for the host to start…</div>
+          <button class="back" type="button" id="leave" style="margin-top:18px">Leave game</button>
+        </div>
+
+        <div class="stp state" id="stState">
+          <div class="sti" id="stIc" aria-hidden="true"></div>
+          <h2 id="stT"></h2>
+          <p id="stP"></p>
+          <button class="btn lg" id="stBack" type="button" data-f>Try another PIN</button>
+        </div>
+
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<section class="modes" id="modes">
+  <div class="in">
+    <h2>Pick your <em>game mode.</em></h2>
+    <p class="sub">Five ways to play, one goal: get everyone excited to answer.</p>
+    <div class="bento">
+      <article class="tile t-classic" tabindex="0"><span class="emo">🏆</span><h3>Classic</h3><p>The original race to the podium. Answer fast, climb the leaderboard.</p><span class="tag">2–200 players</span></article>
+      <article class="tile t-team" tabindex="0"><span class="emo">⚔️</span><h3>Team Battle</h3><p>Squads go head to head and share the points.</p><span class="tag">4–100 players</span></article>
+      <article class="tile t-gold" tabindex="0"><span class="emo">💰</span><h3>Gold Rush</h3><p>Answer right, steal loot.</p><span class="tag">2–60 players</span></article>
+      <article class="tile t-tower" tabindex="0"><span class="emo">🏰</span><h3>Tower Defense</h3><p>Correct answers build your defenses.</p><span class="tag">2–40 players</span></article>
+      <article class="tile t-speed" tabindex="0"><span class="emo">⚡</span><h3>Speed Round</h3><p>Ten seconds a question. No time to blink.</p><span class="tag">2–200 players</span></article>
+    </div>
+  </div>
+</section>
+
+<section class="trend" id="discover">
+  <div class="head"><h2>Trending <em>quizzes</em></h2></div>
+  <div class="rail is-loading" id="rail" tabindex="0" aria-label="Trending quizzes" aria-busy="true">
+    <article class="qc sk" aria-hidden="true"><div class="cover"></div><div class="qb"><i class="l1"></i><i class="l2"></i><i class="l3"></i><div class="l4"><b></b><u></u></div></div></article><article class="qc sk" aria-hidden="true"><div class="cover"></div><div class="qb"><i class="l1"></i><i class="l2"></i><i class="l3"></i><div class="l4"><b></b><u></u></div></div></article><article class="qc sk" aria-hidden="true"><div class="cover"></div><div class="qb"><i class="l1"></i><i class="l2"></i><i class="l3"></i><div class="l4"><b></b><u></u></div></div></article><article class="qc sk" aria-hidden="true"><div class="cover"></div><div class="qb"><i class="l1"></i><i class="l2"></i><i class="l3"></i><div class="l4"><b></b><u></u></div></div></article>
+    <article class="qc"><div class="cover" style="background:linear-gradient(135deg,#F472B6,#7C3AED)"><span>🌍</span><a href="#" class="btn lime">Play</a></div><div class="qb"><h3>World Capitals Showdown</h3><div class="meta"><span>20 questions</span><span>48.2K plays</span></div><div class="by"><i class="av" style="background:#EC4899">MR</i>Ms. Rivera</div></div></article>
+    <article class="qc"><div class="cover" style="background:linear-gradient(135deg,#A3E635,#0EA5E9)"><span>🧪</span><a href="#" class="btn lime">Play</a></div><div class="qb"><h3>Periodic Table Blitz</h3><div class="meta"><span>15 questions</span><span>31.7K plays</span></div><div class="by"><i class="av" style="background:#0EA5E9">DK</i>Mr. Kim</div></div></article>
+    <article class="qc"><div class="cover" style="background:linear-gradient(135deg,#FBBF24,#EF4444)"><span>➗</span><a href="#" class="btn lime">Play</a></div><div class="qb"><h3>Fractions Fast Lane</h3><div class="meta"><span>12 questions</span><span>27.9K plays</span></div><div class="by"><i class="av" style="background:#EF4444">JO</i>Jade Okafor</div></div></article>
+    <article class="qc"><div class="cover" style="background:linear-gradient(135deg,#34D399,#4F46E5)"><span>🦖</span><a href="#" class="btn lime">Play</a></div><div class="qb"><h3>Dinosaurs of the Past</h3><div class="meta"><span>18 questions</span><span>22.4K plays</span></div><div class="by"><i class="av" style="background:#059669">TB</i>Tom Bailey</div></div></article>
+    <article class="qc"><div class="cover" style="background:linear-gradient(135deg,#60A5FA,#7C3AED)"><span>📜</span><a href="#" class="btn lime">Play</a></div><div class="qb"><h3>Ancient Rome in 10 Minutes</h3><div class="meta"><span>10 questions</span><span>19.1K plays</span></div><div class="by"><i class="av" style="background:#6366F1">SL</i>Ms. Lopez</div></div></article>
+    <article class="qc"><div class="cover" style="background:linear-gradient(135deg,#FB7185,#F59E0B)"><span>🔤</span><a href="#" class="btn lime">Play</a></div><div class="qb"><h3>Spelling Bee Grade 5</h3><div class="meta"><span>25 questions</span><span>15.6K plays</span></div><div class="by"><i class="av" style="background:#F59E0B">AP</i>Anna Patel</div></div></article>
+  </div>
+</section>
+
+<section class="how" id="how">
+  <div class="in">
+    <h2>How it works</h2>
+    <div class="steps">
+      <div class="step"><div class="num">1</div><div><h3>Host</h3><p>Pick a quiz and start a live game in one click.</p></div></div>
+      <div class="step"><div class="num">2</div><div><h3>Join</h3><p>Students enter the PIN on any device. No accounts needed.</p></div></div>
+      <div class="step"><div class="num">3</div><div><h3>Play</h3><p>Race through questions and watch the leaderboard live.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="f" id="why">
+  <div class="in">
+    <h2>Every lesson, a little more electric.</h2>
+    <div class="grid">
+      <article class="fc"><div class="ic">🏁</div><h3>Game Modes</h3><p>Classic races, team battles and cozy co-op modes keep every student in the game.</p></article>
+      <article class="fc" id="teachers"><div class="ic">📊</div><h3>For Teachers</h3><p>Launch in one click and get instant reports on who nailed it and who needs a nudge.</p></article>
+      <article class="fc"><div class="ic">📱</div><h3>Join anywhere</h3><p>No app, no accounts. Students type a PIN on a phone, tablet or laptop and play.</p></article>
+    </div>
+  </div>
+</section>
+</main>
+<footer>
+  <div class="fin">
+    <div>
+      <a href="#" class="logo"><i>⚡</i>BrainBlitz</a>
+      <p style="margin:0;max-width:30ch">Live quiz games that make every classroom louder in the best way.</p>
+      <div class="soc">
+        <a href="#" aria-label="X"><svg viewBox="0 0 24 24"><path d="M18.2 2H21l-6.5 7.4L22 22h-6l-4.7-6.1L5.9 22H3l7-8L2.5 2h6.1l4.2 5.6L18.2 2zm-1 18h1.7L7.9 3.9H6.1L17.2 20z"/></svg></a>
+        <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M7 2h10a5 5 0 015 5v10a5 5 0 01-5 5H7a5 5 0 01-5-5V7a5 5 0 015-5zm0 2a3 3 0 00-3 3v10a3 3 0 003 3h10a3 3 0 003-3V7a3 3 0 00-3-3H7zm5 3.5a4.5 4.5 0 110 9 4.5 4.5 0 010-9zm0 2a2.5 2.5 0 100 5 2.5 2.5 0 000-5zM17.5 6a1 1 0 110 2 1 1 0 010-2z"/></svg></a>
+        <a href="#" aria-label="YouTube"><svg viewBox="0 0 24 24"><path d="M21.6 7.2a2.5 2.5 0 00-1.8-1.8C18.2 5 12 5 12 5s-6.2 0-7.8.4A2.5 2.5 0 002.4 7.2C2 8.8 2 12 2 12s0 3.2.4 4.8a2.5 2.5 0 001.8 1.8C5.8 19 12 19 12 19s6.2 0 7.8-.4a2.5 2.5 0 001.8-1.8c.4-1.6.4-4.8.4-4.8s0-3.2-.4-4.8zM10 15V9l5.2 3L10 15z"/></svg></a>
+        <a href="#" aria-label="TikTok"><svg viewBox="0 0 24 24"><path d="M16.6 2h-3.2v13.2a2.9 2.9 0 11-2.9-2.9c.3 0 .6 0 .8.1V9.1a6.1 6.1 0 105.3 6.1V8.6a7.4 7.4 0 004.3 1.4V6.8a4.3 4.3 0 01-4.3-4.8z"/></svg></a>
+      </div>
+    </div>
+    <div><h4>Product</h4><ul><li><a href="#discover">Discover</a></li><li><a href="#modes">Game Modes</a></li><li><a href="#how">How it works</a></li></ul></div>
+    <div><h4>Teachers</h4><ul><li><a href="#teachers">For Teachers</a></li><li><a href="#">Lesson ideas</a></li><li><a href="#">Reports</a></li></ul></div>
+    <div><h4>Company</h4><ul><li><a href="#">About</a></li><li><a href="#">Privacy</a></li><li><a href="#">Contact</a></li></ul></div>
+  </div>
+  <div class="copy">© 2026 BrainBlitz. Made for classrooms.</div>
+</footer>
+
+</div>
+<div data-screen="editor">
+<div class="topw">
+  <nav class="top" aria-label="Editor">
+    <a href="#" class="logo" data-home aria-label="BrainBlitz home"><i>⚡</i><span>BrainBlitz</span></a>
+    <button class="menu-btn" id="edBtn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="edMenu">⋯</button>
+    <input id="title" class="ttl" placeholder="Untitled quiz" maxlength="60" aria-label="Quiz title">
+    <div class="edmenu" id="edMenu">
+    <button class="btn ghost" id="sample" type="button">✨ Fill with sample quiz</button>
+    <button class="btn ghost" id="myq" type="button">📚 My quizzes</button>
+    </div>
+    <button class="btn lime" id="save" type="button">Save quiz</button>
+    <button class="btn" id="host" type="button">🎮 Host</button>
+  </nav>
+</div>
+
+<div class="etabs" id="etabs" role="tablist" aria-label="Editor sections">
+  <button class="opt" role="tab" data-tab="list" aria-selected="false" type="button">📋 Questions</button>
+  <button class="opt on" role="tab" data-tab="edit" aria-selected="true" type="button">✏️ Edit</button>
+  <button class="opt" role="tab" data-tab="set" aria-selected="false" type="button">⚙️ Settings</button>
+</div>
+
+<main class="app" data-tab="edit">
+  <aside class="side" aria-label="Questions">
+    <div class="lh"><h2>Questions</h2><span id="count"></span></div>
+    <ul class="list" id="list"></ul>
+    <button class="btn lime" id="add" type="button">+ Add question</button>
+  </aside>
+
+  <section class="stage" aria-label="Question editor">
+    <div class="qhead" id="qhead"></div>
+    <div class="qcard">
+      <textarea id="qtext" maxlength="120" placeholder="Start typing your question" aria-label="Question"></textarea>
+      <div class="cnt" id="cnt"></div>
+      <div class="media">
+        <label class="drop" id="drop">
+          <input type="file" id="file" accept="image/*" aria-label="Upload an image">
+          <div id="ph">🖼️<b>Add an image</b><span>Drop a file here or click to upload</span></div>
+          <img id="prev" alt="Question image" hidden>
+        </label>
+        <button class="rm" id="rm" type="button" hidden aria-label="Remove image">Remove</button>
+      </div>
+    </div>
+    <div class="ehint" id="hint" role="status" hidden></div>
+    <div class="answers" id="answers"></div>
+  </section>
+
+  <aside class="set" aria-label="Question settings">
+    <h2>Settings</h2>
+    <h3>Question type</h3>
+    <div class="types">
+      <button class="opt" data-type="quiz" type="button">📝 Quiz</button>
+      <button class="opt" data-type="tf" type="button">⚖️ True / False</button>
+      <button class="opt" data-type="poll" type="button">📊 Poll</button>
+    </div>
+    <h3>Time limit</h3>
+    <div class="chips">
+      <button class="opt" data-time="5" type="button">5 sec</button>
+      <button class="opt" data-time="10" type="button">10 sec</button>
+      <button class="opt" data-time="20" type="button">20 sec</button>
+      <button class="opt" data-time="30" type="button">30 sec</button>
+    </div>
+    <h3>Points</h3>
+    <div class="two-col">
+      <button class="opt" data-pts="std" type="button">Standard</button>
+      <button class="opt" data-pts="dbl" type="button">Double ⚡</button>
+    </div>
+    <p class="note" id="ptsNote" hidden>Polls don't award points.</p>
+  </aside>
+</main>
+</div>
+<section data-screen="lobby" class="lobby" aria-label="Game lobby">
+  <button class="btn ghost lexit" id="lexit" type="button">← Exit</button>
+  <p class="ljoin">Join at <b>brainblitz.app</b> with Game PIN</p>
+  <h1 class="pin" id="pin" aria-live="polite">000 000</h1>
+  <div class="lrow">
+    <div class="qr"><svg viewBox="0 0 21 21" id="qr" shape-rendering="crispEdges" aria-label="QR code placeholder"></svg>Scan to join</div>
+    <div class="count"><div><b id="pcnt">0</b></div><span id="cntlbl">players joined</span></div>
+  </div>
+  <div class="players" id="players" aria-live="polite"></div>
+  <button class="btn lime start" id="start" type="button" disabled>Start</button>
+  <p class="lhint" id="lhint"></p>
+</section>
+<section data-screen="question" class="qs" aria-label="Question">
+  <div class="prog"><span id="ptxt">Question 1 of 1</span><i><u id="pbar"></u></i></div>
+  <div class="qtop"><h2 id="qtext2"></h2></div>
+  <div class="qmeta">
+    <div class="qpill"><b id="acnt">0</b><small id="atot">answers</small></div>
+    <div class="ring" id="ring" role="timer" aria-live="off"><svg viewBox="0 0 100 100"><circle class="bg" cx="50" cy="50" r="45"/><circle class="fg" id="fg" cx="50" cy="50" r="45"/></svg><b id="secs">0</b></div>
+    <div class="qpill" style="visibility:hidden"><b>0</b></div>
+  </div>
+  <div class="tiles" id="tiles"></div>
+  <div class="chart" id="chart"><div class="bars" id="bars"></div><p class="cnote" id="cnote"></p></div>
+</section>
+<section data-screen="feedback" class="fb" id="fb" role="status"><div><div class="fbh" id="fbh"></div><div class="fbp" id="fbp"></div><div class="fbs" id="fbs"></div></div></section>
+<section data-screen="leaderboard" class="lbs" aria-label="Leaderboard"><h2 id="lbt">Leaderboard</h2><div class="lb" id="lb"></div><button class="btn lime start" id="next" type="button">Next question ▶</button></section>
+<section data-screen="quizzes" class="mq" aria-label="My quizzes">
+  <div class="mqh"><h2>My Quizzes 📚</h2><div><button class="btn ghost" id="mqHome" type="button">Home</button><button class="btn lime" id="mqNew" type="button">+ New quiz</button></div></div>
+  <ul class="mql" id="mql"></ul>
+</section>
+<section data-screen="final" class="fnl" aria-label="Final results">
+  <h2>Final results 🏆</h2>
+  <div class="tabs" role="tablist"><button class="btn on" id="tabRes" type="button" role="tab" aria-selected="true">🏆 Results</button><button class="btn" id="tabRep" type="button" role="tab" aria-selected="false">📋 Report</button></div>
+  <p class="drum" id="drum" aria-live="polite"></p>
+  <div class="pod" id="pod"><div class="spot" id="spot"></div><div class="glow" id="glow"></div><div class="slots" id="slots"></div></div>
+  <div class="after" id="after">
+    <div class="rc">
+      <div class="rch"><span id="rcav"></span><div><b>Your result</b><small id="rcsub"></small></div></div>
+      <div class="rcs"><div><b id="s-rank"></b><small>Rank</small></div><div><b id="s-score"></b><small>Score</small></div><div><b id="s-acc"></b><small>Accuracy</small></div><div><b id="s-str"></b><small>Best streak</small></div></div>
+      <div class="bdg" id="bdg"></div>
+      <div class="fbtns"><button class="btn lime" id="again" type="button">Play again</button><button class="btn" id="share" type="button">Share result</button><button class="btn ghost" id="newquiz" type="button">New quiz</button><button class="btn ghost" id="tohome" type="button">Home</button></div>
+    </div>
+    <h3 class="fh">Full leaderboard</h3>
+    <ol class="fl" id="fl"></ol>
+  </div>
+  <div class="rep-pane" id="repPane" role="tabpanel" aria-label="Host report">
+    <div class="rsum" id="rsum"></div>
+    <div class="rhead"><h3>Questions</h3><button class="btn lime" id="csv" type="button">⬇ Export CSV</button></div>
+    <div id="rqs"></div>
+    <h3 class="fh">Players who may need help</h3>
+    <ul class="help" id="help"></ul>
+  </div>
+</section>
+<canvas id="conf" aria-hidden="true"></canvas>
+<div class="ctl" id="ctl"><button class="btn ghost" id="pause" type="button">⏸ Pause</button><button class="btn" id="skip" type="button">Skip ⏭</button></div>
+<div class="pz" id="pz" role="status">⏸ Paused</div>
+<button class="theme" id="theme" type="button" aria-label="Switch to light mode"><span aria-hidden="true">🌙</span></button>
+<div class="recon" id="recon" role="status" aria-live="polite"><span class="spin" aria-hidden="true"></span><div><b id="reconT">Reconnecting…</b><small id="reconS">Hang tight, your spot is saved</small></div></div>
+<div class="toast" id="toast" role="status"></div>
+
+
+
+<script src="assets/js/join.js"></script>
+<script src="assets/js/app.js"></script>
+</body>
+</html>
